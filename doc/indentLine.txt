@@ -27,7 +27,14 @@ g:indentLine_loaded                             *g:loaded_indentLine*
 g:indentLine_char                               *g:indentLine_char*
                 Specify a character to be used as indent line.
                 You also can use other characters:
-                  | ¦ ┆  │
+                  | ¦ ┆ │
+                Default value is "|".
+
+g:indentLine_first_char                         *g:indentLine_first_char*
+                Specify a character to be used as indent line
+                on the first level.
+                You also can use other characters:
+                  | ¦ ┆ │
                 Default value is "|".
 
 g:indentLine_color_term                         *g:indentLine_color_term*
@@ -44,6 +51,12 @@ g:indentLine_indentLevel                        *g:indentLine_indentLevel*
                 indentLine. Most program will not has bigger indent level than
                 10.
                 Default value is 10.
+
+g:indentLine_showFirstIndentLevel               *g:indentLine_showFirstIndentLevel*
+                Specify whether the first indent level should be shown.
+                This is useful if you use indentLine in comination with
+                |listchars| in order to show tabs.
+                Default value is 0.
 
 g:indentLine_enabled                            *g:indentLine_enabled*
                 Specify whether to enable indentLine plugin by default.
@@ -63,6 +76,19 @@ g:indentLine_fileTypeExclude                    *g:indentLine_fileTypeExclude*
                 default.
                 e.g. let g:indentLine_fileType = ['text', 'sh']
                 Default value is [] which means no file types is excluded.
+
+g:indentLine_bufNameExclude                     *g:indentLine_bufNameExclude*
+                This variable specify a list of buffer names, which can be
+                regular expression. If the buffer's name fall into this list,
+                the indentLine won't display.
+                e.g. let g:indentLine_bufNameExclude = ['_.*', 'NERD_tree.*']
+                Default value is [].
+
+g:indentLine_maxLines                           *g:indentLine_maxLines*
+                This variable specify a number, when the number of buffer's
+                lines exceed it, the plugin try to use another pattern to make
+                the performance better.
+                Default value is 3000.
 
 ==============================================================================
 COMMANDS                                         *indentLine-commands*
