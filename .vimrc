@@ -14,15 +14,15 @@ if has("cscope")
     else
         "echo "warning: can't find cscope"
     endif    
-	set csto=0
-	set cst
-	set nocsverb
+    set csto=0
+    set cst
+    set nocsverb
     if filereadable("./cscope.out")
         cs add ./cscope.out
     else
         "echo "warning: can't find cscope database"
     endif    
-	set csverb
+    set csverb
 endif	
 
 set tags=tags
@@ -141,16 +141,6 @@ map <C-q> :q<cr>
 imap <C-q> <ESC>:q<cr>
 map <C-S-q> :q!<cr>
 imap <C-S-q> <ESC>:q!<cr>
-"-------------------------------------------------------------------------------
-"" autocomplete parenthesis, brackets and braces
-"-------------------------------------------------------------------------------
-inoremap ( ()<Left>
-inoremap [ []<Left>
-inoremap { {}<Left>
-""
-vnoremap ( s()<Esc>P<Right>%
-vnoremap [ s[]<Esc>P<Right>%
-vnoremap { s{}<Esc>P<Right>%
 
 let c_syntax_for_h=1
 let c_C94=1
@@ -169,189 +159,184 @@ let c_comment_types=1
 let c_comment_date_time=1
 " vim -b : edit binary using xxd-format!
 augroup Binary
-au!
-au BufReadPre  *.bin let &bin=1
-au BufReadPost *.bin if &bin | %!xxd
-au BufReadPost *.bin set ft=xxd | endif
-au BufWritePre *.bin if &bin | %!xxd -r
-au BufWritePre *.bin endif
-au BufWritePost *.bin if &bin | %!xxd
-au BufWritePost *.bin set nomod | endif
+    au!
+    au BufReadPre  *.bin let &bin=1
+    au BufReadPost *.bin if &bin | %!xxd
+    au BufReadPost *.bin set ft=xxd | endif
+    au BufWritePre *.bin if &bin | %!xxd -r
+    au BufWritePre *.bin endif
+    au BufWritePost *.bin if &bin | %!xxd
+    au BufWritePost *.bin set nomod | endif
 augroup END
 
 
 "使用方法：在普通模式下击键zho
 function InsertPragmaOnceTag()
-let CurTime = strftime("%Y_%m_%d_%H_%M") "将当前时间格式化后存入到CurTime当中去
-let CurFilePath = toupper(expand("%")) "expand(/"%/")获取当前编辑的文件路径
-let LastSlash = strridx(CurFilePath, "/") "找出路径中最后一个/
-let HeadTag1 = "#ifndef "
-let HeadTag2 = "#define "
-let HeadTag3 = "#endif //"
-"将非数字、字母替换为_
-let Suffix = substitute(strpart(CurFilePath, LastSlash + 1), "[^a-zA-Z0-9]", "_", "g")."_".CurTime 
-let HeadTag1 = HeadTag1.Suffix
-let HeadTag2 = HeadTag2.Suffix
-let HeadTag3 = HeadTag3.Suffix
+    let CurTime = strftime("%Y_%m_%d_%H_%M") "将当前时间格式化后存入到CurTime当中去
+    let CurFilePath = toupper(expand("%")) "expand(/"%/")获取当前编辑的文件路径
+    let LastSlash = strridx(CurFilePath, "/") "找出路径中最后一个/
+    let HeadTag1 = "#ifndef "
+    let HeadTag2 = "#define "
+    let HeadTag3 = "#endif //"
+    "将非数字、字母替换为_
+    let Suffix = substitute(strpart(CurFilePath, LastSlash + 1), "[^a-zA-Z0-9]", "_", "g")."_".CurTime 
+    let HeadTag1 = HeadTag1.Suffix
+    let HeadTag2 = HeadTag2.Suffix
+    let HeadTag3 = HeadTag3.Suffix
 
-"跳转到第一行并输入#ifndef ..
-exe "normal ggO".HeadTag1 
-exe "normal O".HeadTag2
-exe "normal Go".HeadTag3
-"添加一个空白行
-exe "normal o"
-"添加两行空白行并将光标停在第四行
-normal 3GO
-normal 4GO
+    "跳转到第一行并输入#ifndef ..
+    exe "normal ggO".HeadTag1 
+    exe "normal O".HeadTag2
+    exe "normal Go".HeadTag3
+    "添加一个空白行
+    exe "normal o"
+    "添加两行空白行并将光标停在第四行
+    normal 3GO
+    normal 4GO
 endfunction
 
 
 "添加doxygen风格的文件注释
 "使用方法：在普通模式下击键zfc
 function InsertFileCommentTag()
-let l:File_Path = expand("%")
-let l:File_Name = strpart(l:File_Path, strridx(l:File_Path, "/") + 1)
-exe "normal ggO/**"
-exe "normal o* @file ".l:File_Name
-exe "normal o* @brief "
-let l:wRow = winline()
-let l:wCol = wincol()
-exe "normal o* @author hou_jian , houjmail@gmail.com"
-exe "normal o* @version 1.0"
-exe "normal o* @date ".strftime("%Y/%m/%d-%H:%M:%S")
-exe "normal o* @note "
-exe "normal o* @remarks Copyright 1998 - 2008 Company Name Inc. All Rights Reserved."
-exe "normal o*/"
-"重新缩进文件
-exe "silent normal gg=G"
-"设置光标在@brief后面
-:call cursor(l:wRow, l:wCol)
+    let l:File_Path = expand("%")
+    let l:File_Name = strpart(l:File_Path, strridx(l:File_Path, "/") + 1)
+    exe "normal ggO/**"
+    exe "normal o* @file ".l:File_Name
+    exe "normal o* @brief "
+    let l:wRow = winline()
+    let l:wCol = wincol()
+    exe "normal o* @author hou_jian , houjmail@gmail.com"
+    exe "normal o* @version 1.0"
+    exe "normal o* @date ".strftime("%Y/%m/%d-%H:%M:%S")
+    exe "normal o* @note "
+    exe "normal o* @remarks Copyright 1998 - 2008 Company Name Inc. All Rights Reserved."
+    exe "normal o*/"
+    "重新缩进文件
+    exe "silent normal gg=G"
+    "设置光标在@brief后面
+    :call cursor(l:wRow, l:wCol)
 endfunction
 
 
 "添加doxygen风格的类注释
 "使用方法：在普通模式下，将光标停留在类名上面击键zcc
 function InsertClassCommentTag()
-let Class_Name = expand("<cword>")
-exe "normal O/**"
-exe "normal o* @class ".Class_Name
-exe "normal o* @brief "
-let l:wRow = winline()
-let l:wCol = wincol()
-exe "normal o* @author hou_jian , houjmail@gmail.com" 
-exe "normal o* @version 1.0"
-exe "normal o* @date ".strftime("%Y/%m/%d-%H:%M:%S")
-exe "normal o* @note "
-exe "normal o*/"
-"exe silent normal gg=G
-":call cursor(l:wRow, l:wCol)
+    let Class_Name = expand("<cword>")
+    exe "normal O/**"
+    exe "normal o* @class ".Class_Name
+    exe "normal o* @brief "
+    let l:wRow = winline()
+    let l:wCol = wincol()
+    exe "normal o* @author hou_jian , houjmail@gmail.com" 
+    exe "normal o* @version 1.0"
+    exe "normal o* @date ".strftime("%Y/%m/%d-%H:%M:%S")
+    exe "normal o* @note "
+    exe "normal o*/"
+    "exe silent normal gg=G
+    ":call cursor(l:wRow, l:wCol)
 endfunction
 
 
 "添加doxygen风格的函数注释
 "使用方法：在普通模式下面，将光标停留在函数名称行击键zmc
 function InsertFunctionCommentTag()
-exe "normal O/**"
-exe "normal o* @brief "
-let l:wRow = winline()
-let l:wCol = wincol()
-exe "normal o* @param "
-exe "normal o* @return "
-exe "normal o* @note "
-exe "normal o*/"
-exe "silent normal gg=G"
-:call cursor(l:wRow, l:wCol)
+    exe "normal O/**"
+    exe "normal o* @brief "
+    let l:wRow = winline()
+    let l:wCol = wincol()
+    exe "normal o* @param "
+    exe "normal o* @return "
+    exe "normal o* @note "
+    exe "normal o*/"
+    exe "silent normal gg=G"
+    :call cursor(l:wRow, l:wCol)
 endfunction
 
 
 "添加doxygen风格的结构体注释
 "使用方法：在普通模式下，将光标停留在结构体名称上面击键zsc
 function InsertStructCommentTag()
-let l:Struct_Name = expand("<cword>")
-exe "normal O/**"
-exe "normal o* @struct ".l:Struct_Name
-exe "normal o* @brief "
-let l:wRow = winline()
-let l:wCol = wincol()
-exe "normal o* @note "
-exe "normal o*/"
-exe "silent normal gg=G"
-":call cursor(l:wRow, l:wCol)
+    let l:Struct_Name = expand("<cword>")
+    exe "normal O/**"
+    exe "normal o* @struct ".l:Struct_Name
+    exe "normal o* @brief "
+    let l:wRow = winline()
+    let l:wCol = wincol()
+    exe "normal o* @note "
+    exe "normal o*/"
+    exe "silent normal gg=G"
+    ":call cursor(l:wRow, l:wCol)
 endfunction
 
 
 "添加doxygen风格的枚举体注释
 "使用方法：在普通模式下，将光标停留在枚举体名称上面击键zec
 function InsertEnumCommentTag()
-let l:Enum_Name = expand("<cword>")
-exe "normal O/**"
-exe "normal o* @enum ".l:Enum_Name
-exe "normal o* @brief "
-let l:wRow = winline()
-let l:wCol = wincol()
-exe "normal o* @note "
-exe "normal o*/"
-exe "silent normal gg=G"
-":call cursor(l:wRow, l:wCol)
+    let l:Enum_Name = expand("<cword>")
+    exe "normal O/**"
+    exe "normal o* @enum ".l:Enum_Name
+    exe "normal o* @brief "
+    let l:wRow = winline()
+    let l:wCol = wincol()
+    exe "normal o* @note "
+    exe "normal o*/"
+    exe "silent normal gg=G"
+    ":call cursor(l:wRow, l:wCol)
 endfunction
 
 
 "添加doxygen风格的模块定义注释
 "使用方法：在visual模式下选定要加入到模块的行，击键zgc
 function InsertGroupCommentTag()
-"获取选定的行
-let l:wBegin = line("'<")
-let l:wEnd = line("'>")
-exe "normal ".l:wBegin."G"
-exe "normal O/**"
-exe "normal o* @defgroup "
-let l:wRow = winline()
-let l:wCol = wincol()
-exe "normal o* @brief "
-exe "normal o* @detail "
-exe "normal o* @{"
-exe "normal o* */"
-exe "normal o"
-let l:wEnd = l:wEnd + 7 
-exe "normal ".l:wEnd."G"
-exe "normal o/** @} */ //end define of group" 
-":call cursor(l:wRow, l:wCol)
+    "获取选定的行
+    let l:wBegin = line("'<")
+    let l:wEnd = line("'>")
+    exe "normal ".l:wBegin."G"
+    exe "normal O/**"
+    exe "normal o* @defgroup "
+    let l:wRow = winline()
+    let l:wCol = wincol()
+    exe "normal o* @brief "
+    exe "normal o* @detail "
+    exe "normal o* @{"
+    exe "normal o* */"
+    exe "normal o"
+    let l:wEnd = l:wEnd + 7 
+    exe "normal ".l:wEnd."G"
+    exe "normal o/** @} */ //end define of group" 
+    ":call cursor(l:wRow, l:wCol)
 endfunction
 
 
 "在符号(宏、成员变量、全局变量)后增加doxygen风格的注释
 "使用方法：普通模式下，在符号定义行击键zpc
 function InsertItemPostCommentTag()
-exe "normal A/t"
-let l:wRow = winline()
-let l:wCol = wincol()
-while l:wCol < 60
     exe "normal A/t"
+    let l:wRow = winline()
     let l:wCol = wincol()
+    while l:wCol < 60
+        exe "normal A/t"
+        let l:wCol = wincol()
     endwhile
     exe "normal A/*!< */"
     exe "normal 2h"
-    endfunction
-    
-    
-    "在符号(宏、成员变量、全局变量)上方增加doxygen风格的注释或者是函数的简单说明
-    "使用方法：在普通模式下，在符号定义行击键zuc
-    function InsertItemUpCommentTag()
+endfunction
+
+
+"在符号(宏、成员变量、全局变量)上方增加doxygen风格的注释或者是函数的简单说明
+"使用方法：在普通模式下，在符号定义行击键zuc
+function InsertItemUpCommentTag()
     exe "normal O"
     exe "normal o/// "
-    endfunction
-    nmap zho <Esc>:call InsertPragmaOnceTag()<CR>i
-    nmap zfc <Esc>:call InsertFileCommentTag()<CR>i
-    nmap zcc <Esc>:call InsertClassCommentTag()<CR>i
-    nmap zmc <Esc>:call InsertFunctionCommentTag()<CR>i
-    nmap zsc <Esc>:call InsertStructCommentTag()<CR>i
-    nmap zec <Esc>:call InsertEnumCommentTag()<CR>i
-    nmap zpc <Esc>:call InsertItemPostCommentTag()<CR>i
-    nmap zuc <Esc>:call InsertItemUpCommentTag()<CR>i
-    vmap zgc <Esc>:call InsertGroupCommentTag()<CR>i 
+endfunction
+nmap zho <Esc>:call InsertPragmaOnceTag()<CR>i
+nmap zfc <Esc>:call InsertFileCommentTag()<CR>i
+nmap zcc <Esc>:call InsertClassCommentTag()<CR>i
+nmap zmc <Esc>:call InsertFunctionCommentTag()<CR>i
+nmap zsc <Esc>:call InsertStructCommentTag()<CR>i
+nmap zec <Esc>:call InsertEnumCommentTag()<CR>i
+nmap zpc <Esc>:call InsertItemPostCommentTag()<CR>i
+nmap zuc <Esc>:call InsertItemUpCommentTag()<CR>i
+vmap zgc <Esc>:call InsertGroupCommentTag()<CR>i 
 
-    
-
-
-
-    
