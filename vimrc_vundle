@@ -52,13 +52,19 @@
     inoremap     \a        : A<CR>
 "==============================================================================================
 
-"====================================startify.vim config ======================================
+"==================================== startify.vim config ======================================
     let g:startify_change_to_dir = 0 "open file from startify do not change dir
 "==============================================================================================
-"
+
+"======================================= vim-javascript =======================================
+    let g:javascript_plugin_jsdoc = 1
+    let g:javascript_plugin_ngdoc = 1
+"==============================================================================================
+
 "====================================== YCM config ============================================
     let g:ycm_confirm_extra_conf = 0
     lef g:ycm_goto_buffer_command = 'horizontal-split'
+    nnoremap <leader>g  :YcmCompleter GoTo<CR>
     nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
     nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
     nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
@@ -67,6 +73,10 @@
 "====================================== ctrlp =========================================
     let g:ctrlp_working_path_mode = 0
     let g:ctrlp_clear_cache_on_exit = 0 
+    if executable("ag")
+        set grepprg=ag\ --nogroup\ --nocolor "also make vim faster!
+        let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+    endif
     nnoremap <C-p>m :CtrlPMRU<CR> "most recenty files use CtrlPMRU
 "=====================================================================================
 
@@ -75,9 +85,12 @@
     let g:indent_guides_auto_colors = 0
     let g:indent_guides_enable_on_vim_startup=1
     let g:indent_guides_start_level=2
-    autocmd VimEnter,Colorscheme * :IndentGuidesToggle
-    autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd   ctermbg=darkgrey 
-    autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=102
+    hi IndentGuidesOdd  ctermbg=darkgrey
+    hi IndentGuidesEven ctermbg=102
+    "autocmd VimEnter,Colorscheme * :IndentGuidesToggle
+    "autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd   ctermbg=darkgrey 
+    "autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=102
+    let g:indent_guides_exclude_filetypes = ['help', 'nerdtree']
 "=============================================================================================
 
 "====================================== ack.vim ===========================================
@@ -97,7 +110,7 @@
 "==========================================================================================
 
 "===================================== vim-airline ==============================================
-    let g:airline_theme='light'
+    let g:airline_theme='cool'
 "================================================================================================
 
 "====================================== Vundle Config =========================================
@@ -136,6 +149,7 @@
     Plugin 'octol/vim-cpp-enhanced-highlight'
     Plugin 'Shougo/vimproc.vim'
     Plugin 'Shougo/vimshell.vim'
+    Plugin 'pangloss/vim-javascript'
 
     " All of your Plugins must be added before the following line
     call vundle#end()            " required
