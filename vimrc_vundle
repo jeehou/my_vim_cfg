@@ -63,6 +63,11 @@
     nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
     nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
 "===============================================================================================
+"
+"====================================== ctrlp =========================================
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_clear_cache_on_exit = 0 
+"=====================================================================================
 
 "====================================== indent ================================================
     let g:indent_guides_guide_size=1
