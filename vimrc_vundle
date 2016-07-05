@@ -120,6 +120,7 @@
     Plugin 'rdnetto/YCM-Generator'
     Plugin 'Valloric/YouCompleteMe'
     Plugin 'octol/vim-cpp-enhanced-highlight'
+    Plugin 'Shougo/vimproc.vim'
     Plugin 'Shougo/vimshell.vim'
 
     " All of your Plugins must be added before the following line
