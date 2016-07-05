@@ -1,0 +1,134 @@
+"======================================== Common Config ===========================================
+    set cscopetag
+    set hlsearch
+    set ts=4
+    set expandtab
+    set shiftwidth=4
+    set autoindent
+    set nu
+    set incsearch
+    set nocp
+    set foldenable
+    set ruler                                        " show the cursor position all the time
+    set smartindent                                  " smart autoindentnig when starting a new line
+    set wildignore=*.bak,*.o,*.e,*~                  " wildmenu:ignore these extensions
+    set fdm=indent
+
+    "for the fucking encoding
+    set encoding=utf-8
+    "set termencoding=utf-8
+    set fileencodings=utf-bom,utf-8,cp936,gb18030,latin1
+    language message zh_CN.utf-8
+    set guifont=Consolas:h12:cANSI
+
+    filetype plugin indent on
+    syntax enable
+    set t_Co=256
+    "colorscheme molokai 
+    "colorscheme zenburn 
+    colorscheme lucius 
+    let g:molokai_original=1
+    set background=dark
+"===================================================================================================
+
+"====================================== NERD_Tree config ========================================
+    nnoremap <silent> <F6> : NERDTree<CR>
+    let NERDTreeShowBookmarks=1
+    let NRRDTreeChristmasTree=1
+    "auto NERDTree when start vim
+    autocmd StdinReadPre * let s:std_in=1
+    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | Startify | NERDTree | wincmd w | endif
+    "close vim if the only window left open is a NERDTree
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"================================================================================================
+
+"=================================== vim-cpp-enhanced-highlight=====================================
+    let g:cpp_class_scope_highlight = 1
+    let g:cpp_experimental_template_highlight = 1
+"==================================================================================================
+
+"===================================== a.vim config  =========================================
+    noremap      \a        : A<CR>
+    inoremap     \a        : A<CR>
+"==============================================================================================
+
+"====================================startify.vim config ======================================
+    let g:startify_change_to_dir = 0 "open file from startify do not change dir
+"==============================================================================================
+"
+"====================================== YCM config ============================================
+    let g:ycm_confirm_extra_conf = 0
+    lef g:ycm_goto_buffer_command = 'horizontal-split'
+    nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
+    nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
+    nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+"===============================================================================================
+
+"====================================== indent ================================================
+    let g:indent_guides_guide_size=1
+    let g:indent_guides_auto_colors = 0
+    let g:indent_guides_enable_on_vim_startup=1
+    let g:indent_guides_start_level=2
+    autocmd VimEnter,Colorscheme * :IndentGuidesToggle
+    autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd   ctermbg=darkgrey 
+    autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=102
+"=============================================================================================
+
+"====================================== ack.vim ===========================================
+    if executable('ag')
+        let g:ackprg = 'ag --vimgrep'
+    endif
+"==========================================================================================
+
+"====================================== Vundle Config =========================================
+    set nocompatible              " be iMproved, required
+    filetype off                  " required
+
+    " set the runtime path to include Vundle and initialize
+    set rtp+=~/.vim/bundle/Vundle.vim
+    call vundle#begin()
+    " alternatively, pass a path where Vundle should install plugins
+    "call vundle#begin('~/some/path/here')
+
+    " let Vundle manage Vundle, required
+    Plugin 'VundleVim/Vundle.vim'
+
+    " The following are examples of different formats supported.
+    " Keep Plugin commands between vundle#begin/end.
+    " plugin on GitHub repo
+    Plugin 'tpope/vim-fugitive'
+    " Git plugin not hosted on GitHub
+    "Plugin 'git://git.wincent.com/command-t.git'
+
+    Plugin 'vim-airline/vim-airline'
+    Plugin 'vim-airline/vim-airline-themes'
+    Plugin 'kien/ctrlp.vim'
+    Plugin 'scrooloose/nerdtree'
+    Plugin 'fatih/vim-go'
+    Plugin 'mileszs/ack.vim'
+    Plugin 'vim-scripts/a.vim'
+    Plugin 'flazz/vim-colorschemes'
+    Plugin 'asins/vimcdoc'
+    Plugin 'nathanaelkane/vim-indent-guides'
+    Plugin 'mhinz/vim-startify'
+    Plugin 'rdnetto/YCM-Generator'
+    Plugin 'Valloric/YouCompleteMe'
+    Plugin 'octol/vim-cpp-enhanced-highlight'
+
+    " All of your Plugins must be added before the following line
+    call vundle#end()            " required
+    filetype plugin indent on    " required
+    " To ignore plugin indent changes, instead use:
+    "filetype plugin on
+    "
+    " Brief help
+    " :PluginList       - lists configured plugins
+    " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+    " :PluginSearch foo - searches for foo; append `!` to refresh local cache
+    " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+    "
+    " see :h vundle for more details or wiki for FAQ
+    " Put your non-Plugin stuff after this line
+"============================================================================================
+
+
