@@ -29,6 +29,8 @@
     colorscheme lucius 
     let g:molokai_original=1
     set background=dark
+
+    nnoremap <leader><Space> :tabnext<CR>
 "===================================================================================================
 
 "====================================== NERD_Tree config ========================================
@@ -48,8 +50,8 @@
 "==================================================================================================
 
 "===================================== a.vim config  =========================================
-    noremap      \a        : A<CR>
-    inoremap     \a        : A<CR>
+    noremap      <leader>a        : A<CR>
+    inoremap     <leader>a        : A<CR>
 "==============================================================================================
 
 "==================================== startify.vim config ======================================
@@ -150,6 +152,7 @@
     Plugin 'Shougo/vimproc.vim'
     Plugin 'Shougo/vimshell.vim'
     Plugin 'pangloss/vim-javascript'
+    Plugin 'jistr/vim-nerdtree-tabs'
 
     " All of your Plugins must be added before the following line
     call vundle#end()            " required
