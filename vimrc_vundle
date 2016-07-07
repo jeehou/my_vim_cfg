@@ -42,7 +42,7 @@
     "close vim if the only window left open is a NERDTree
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
     "==================================nerdtree_tab config =============================
-    let g:nerdtree_tabs_open_on_console_startup=1       "设置打开vim的时候默认打开目录树
+    "let g:nerdtree_tabs_open_on_console_startup=1       "设置打开vim的时候默认打开目录树
     "===================================================================================
 "========================================================================================
 
@@ -83,9 +83,10 @@
     let g:ctrlp_clear_cache_on_exit = 0 
     if executable("ag")
         set grepprg=ag\ --nogroup\ --nocolor "also make vim faster!
-        let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+        let g:ctrlp_user_command='ag %s -l -g "" --nocolor --path-to-agignore ~/.agignore'
     endif
     nnoremap <C-p>m :CtrlPMRU<CR> "most recenty files use CtrlPMRU
+    let g:ctrlp_cache_dir = '.ctrlp_cache'
 "====================================================================================
 
 "====================================== indent-guid ======================================
@@ -102,20 +103,19 @@
 "====================================================================================
 
 "====================================== indentline =================================
-    set list lcs=tab:\¦\ 
     let g:indentLine_enabled = 1
     let g:indentLine_char = '¦' 
+    "let g:indentLine_first_char = ' '
     let g:indentLine_color_term = 109
-    let g:indentLine_concealcursor = 'inc'
-    let g:indentLine_conceallevel = 2 
-    let g:indentLine_showFirstIndentLevel = 0 
-    let g:indentLine_faster = 1
+    "let g:indentLine_showFirstIndentLevel = 1
+    let g:indentLine_fileTypeExclude = ['text', 'help']
+    set list lcs=tab:\¦\ 
+    "let g:indentLine_faster = 1
 "====================================================================================
-
 
 "====================================== ack.vim =====================================
     if executable('ag')
-        let g:ackprg = 'ag --vimgrep'
+        let g:ackprg = 'ag --vimgrep --path-to-agignore ~/.agignore'
     endif
     noremap <Leader>s :Ack <cword><cr>
 "===================================================================================
