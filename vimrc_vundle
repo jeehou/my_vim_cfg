@@ -20,7 +20,6 @@
     set guifont=Consolas:h12:cANSI
 
     filetype plugin indent on
-    syntax enable
     syntax on 
     set t_Co=256
     "colorscheme molokai 
