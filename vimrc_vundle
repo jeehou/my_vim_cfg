@@ -35,6 +35,7 @@
 
 "====================================== NERD_Tree config ========================================
     nnoremap <silent> <F6> : NERDTree<CR>
+    let NERDTreeIgnore = ['\.o$']
     let NERDTreeShowBookmarks=1
     let NRRDTreeChristmasTree=1
     "auto NERDTree when start vim
@@ -42,6 +43,9 @@
     autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | Startify | NERDTree | wincmd w | endif
     "close vim if the only window left open is a NERDTree
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+    "==================================nerdtree_tab config =============================
+    let g:nerdtree_tabs_open_on_console_startup=1       "设置打开vim的时候默认打开目录树
+    "===================================================================================
 "================================================================================================
 
 "=================================== vim-cpp-enhanced-highlight=====================================
@@ -64,12 +68,16 @@
 "==============================================================================================
 
 "====================================== YCM config ============================================
-    let g:ycm_confirm_extra_conf = 0
-    lef g:ycm_goto_buffer_command = 'horizontal-split'
-    nnoremap <leader>g  :YcmCompleter GoTo<CR>
-    nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
-    nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
-    nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+    let g:ycm_confirm_extra_conf = 0 "open file with confim .ycm_extra_conf.py
+    let g:ycm_goto_buffer_command = 'horizontal-split'
+    let g:ycm_open_loclist_on_ycm_diags = 1 
+    let g:ycm_global_ycm_extra_conf='~/.vim/ycm_extra_conf.py' 
+    let g:ycm_echo_current_diagnostic = 1
+    nnoremap <leader>g :YcmCompleter GoTo<CR>
+    nnoremap <leader>f :YcmForceCompileAndDiagnostics<CR>
+    "nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
+    "nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
+    "nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
 "===============================================================================================
 "
 "====================================== ctrlp =========================================
