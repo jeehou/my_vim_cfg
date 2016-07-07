@@ -1,4 +1,4 @@
-"======================================== Common Config ===========================================
+"======================================== Common Config ==============================
     set cscopetag
     set hlsearch
     set ts=4
@@ -9,14 +9,12 @@
     set incsearch
     set nocp
     set foldenable
-    set ruler                                        " show the cursor position all the time
-    set smartindent                                  " smart autoindentnig when starting a new line
-    set wildignore=*.bak,*.o,*.e,*~                  " wildmenu:ignore these extensions
+    set ruler                         " show the cursor position all the time
+    set smartindent                   " smart autoindentnig when starting a new line
+    set wildignore=*.bak,*.o,*.e,*~   " wildmenu:ignore these extensions
     set fdm=indent
 
-    "for the fucking encoding
     set encoding=utf-8
-    "set termencoding=utf-8
     set fileencodings=utf-bom,utf-8,cp936,gb18030,latin1
     language message zh_CN.utf-8
     set guifont=Consolas:h12:cANSI
@@ -32,9 +30,9 @@
     set background=dark
 
     nnoremap <leader><Space> :tabnext<CR>
-"===================================================================================================
+"======================================================================================
 
-"====================================== NERD_Tree config ========================================
+"====================================== NERD_Tree config ===============================
     nnoremap <silent> <F6> : NERDTree<CR>
     let NERDTreeIgnore = ['\.o$']
     let NERDTreeShowBookmarks=1
@@ -47,28 +45,28 @@
     "==================================nerdtree_tab config =============================
     let g:nerdtree_tabs_open_on_console_startup=1       "设置打开vim的时候默认打开目录树
     "===================================================================================
-"================================================================================================
+"========================================================================================
 
-"=================================== vim-cpp-enhanced-highlight=====================================
+"============================ vim-cpp-enhanced-highlight ===============================
     let g:cpp_class_scope_highlight = 1
     let g:cpp_experimental_template_highlight = 1
-"==================================================================================================
+"=======================================================================================
 
-"===================================== a.vim config  =========================================
+"===================================== a.vim config  ==================================
     noremap      <leader>a        : A<CR>
     inoremap     <leader>a        : A<CR>
-"==============================================================================================
+"======================================================================================
 
-"==================================== startify.vim config ======================================
+"==================================== startify.vim config ============================
     let g:startify_change_to_dir = 0 "open file from startify do not change dir
-"==============================================================================================
+"=====================================================================================
 
-"======================================= vim-javascript =======================================
+"======================================= vim-javascript ==============================
     let g:javascript_plugin_jsdoc = 1
     let g:javascript_plugin_ngdoc = 1
-"==============================================================================================
+"=====================================================================================
 
-"====================================== YCM config ============================================
+"====================================== YCM config ===================================
     let g:ycm_confirm_extra_conf = 0 "open file with confim .ycm_extra_conf.py
     let g:ycm_goto_buffer_command = 'horizontal-split'
     let g:ycm_open_loclist_on_ycm_diags = 1 
@@ -79,9 +77,9 @@
     "nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
     "nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
     "nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
-"===============================================================================================
+"====================================================================================
 "
-"====================================== ctrlp =========================================
+"====================================== ctrlp =======================================
     let g:ctrlp_working_path_mode = 0
     let g:ctrlp_clear_cache_on_exit = 0 
     if executable("ag")
@@ -89,60 +87,64 @@
         let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
     endif
     nnoremap <C-p>m :CtrlPMRU<CR> "most recenty files use CtrlPMRU
-"=====================================================================================
+"====================================================================================
 
-"====================================== indent ================================================
-    let g:indent_guides_guide_size=1
-    let g:indent_guides_auto_colors = 0
-    let g:indent_guides_enable_on_vim_startup=1
-    let g:indent_guides_start_level=2
-    hi IndentGuidesOdd  ctermbg=darkgrey
-    hi IndentGuidesEven ctermbg=102
+"====================================== indent-guid ======================================
+    "let g:indent_guides_guide_size=1
+    "let g:indent_guides_auto_colors = 0
+    "let g:indent_guides_enable_on_vim_startup=0
+    "let g:indent_guides_start_level=2
+    "hi IndentGuidesOdd  ctermbg=darkgrey
+    "hi IndentGuidesEven ctermbg=102
     "autocmd VimEnter,Colorscheme * :IndentGuidesToggle
     "autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd   ctermbg=darkgrey 
     "autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=102
-    let g:indent_guides_exclude_filetypes = ['help', 'nerdtree']
-"=============================================================================================
+    "let g:indent_guides_exclude_filetypes = ['help', 'nerdtree']
+"====================================================================================
 
-"====================================== ack.vim ===========================================
+"====================================== indentline =================================
+    set list lcs=tab:\¦\ 
+    let g:indentLine_enabled = 1
+    let g:indentLine_char = '¦' 
+    let g:indentLine_color_term = 109
+    let g:indentLine_concealcursor = 'inc'
+    let g:indentLine_conceallevel = 2 
+    let g:indentLine_showFirstIndentLevel = 0 
+    let g:indentLine_faster = 1
+"====================================================================================
+
+
+"====================================== ack.vim =====================================
     if executable('ag')
         let g:ackprg = 'ag --vimgrep'
     endif
     noremap <Leader>s :Ack <cword><cr>
-"==========================================================================================
+"===================================================================================
 
-"===================================== vim.go"=============================================
+"===================================== vim.go"=====================================
     let g:go_highlight_functions = 1
     let g:go_highlight_methods = 1
     let g:go_highlight_fields = 1
     let g:go_highlight_types = 1
     let g:go_highlight_operators = 1
     let g:go_highlight_build_constraints = 1
-"==========================================================================================
+"==================================================================================
 
-"===================================== vim-airline ==============================================
+"===================================== vim-airline ================================
     let g:airline_theme='cool'
-"================================================================================================
+"==================================================================================
 
-"====================================== Vundle Config =========================================
+"====================================== Vundle Config =============================
     set nocompatible              " be iMproved, required
     filetype off                  " required
 
     " set the runtime path to include Vundle and initialize
     set rtp+=~/.vim/bundle/Vundle.vim
-    call vundle#begin()
-    " alternatively, pass a path where Vundle should install plugins
-    "call vundle#begin('~/some/path/here')
+    call vundle#begin() "also call vundle#begin('~/some/path/here')
 
-    " let Vundle manage Vundle, required
     Plugin 'VundleVim/Vundle.vim'
-
-    " The following are examples of different formats supported.
-    " Keep Plugin commands between vundle#begin/end.
-    " plugin on GitHub repo
     Plugin 'tpope/vim-fugitive'
-    " Git plugin not hosted on GitHub
-    "Plugin 'git://git.wincent.com/command-t.git'
+    "Plugin 'git://git.wincent.com/command-t.git' "Git plugin not hosted on GitHub
 
     Plugin 'vim-airline/vim-airline'
     Plugin 'vim-airline/vim-airline-themes'
@@ -153,7 +155,8 @@
     Plugin 'vim-scripts/a.vim'
     Plugin 'flazz/vim-colorschemes'
     Plugin 'asins/vimcdoc'
-    Plugin 'nathanaelkane/vim-indent-guides'
+    "Plugin 'nathanaelkane/vim-indent-guides'
+    Plugin 'yggdroot/indentline'
     Plugin 'mhinz/vim-startify'
     Plugin 'rdnetto/YCM-Generator'
     Plugin 'Valloric/YouCompleteMe'
@@ -178,6 +181,6 @@
     "
     " see :h vundle for more details or wiki for FAQ
     " Put your non-Plugin stuff after this line
-"============================================================================================
+"===================================================================================
 
 
