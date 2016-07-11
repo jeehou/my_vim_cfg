@@ -1,4 +1,4 @@
-"======================================== Common Config ==============================
+"=================================== Common Config ==============================
     set cscopetag
     set hlsearch
     set ts=4
@@ -29,7 +29,22 @@
     set background=dark
 
     nnoremap <leader><Space> :tabnext<CR>
-"======================================================================================
+"================================================================================
+"
+"=============================== my auto header =================================
+let my_auto_header_tmplate = "/home/jee/my_vim_cfg/my_template.txt"
+
+augroup myAutoGroup
+    autocmd!
+    autocmd bufnewfile *.c exe "so ".my_auto_header_tmplate
+    autocmd bufnewfile *.c exe "1," . 10 . "g/File Name :.*/s//File Name : " .expand("%")
+    autocmd bufnewfile *.c exe "1," . 10 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y %H:%M:%S")
+    autocmd Bufwritepre,filewritepre *.c execute "normal ma"
+    autocmd Bufwritepre,filewritepre *.c exe "1," . 10 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
+    autocmd bufwritepost,filewritepost *.c execute "normal `a"
+augroup END
+"================================================================================
+"
 
 "====================================== NERD_Tree config ===============================
     nnoremap <silent> <F6> : NERDTree<CR>
