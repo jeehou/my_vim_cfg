@@ -116,7 +116,7 @@
     let g:airline_theme='cool'
 "==================================================================================
 
-"====================================== Vundle Config =============================
+"============================== Vundle Config =============================
     set nocompatible              " be iMproved, required
     filetype off                  " required
 
@@ -148,6 +148,8 @@
     Plugin 'pangloss/vim-javascript'
     Plugin 'jistr/vim-nerdtree-tabs'
     Plugin 'sheerun/vim-polyglot'
+    Plugin 'mhinz/vim-signify'      "show svn(or else) diff in vim
+    Plugin 'airblade/vim-gitgutter' "show git diff/undo in vim as a gutter
 
     " All of your Plugins must be added before the following line
     call vundle#end()            " required
@@ -163,7 +165,7 @@
     "
     " see :h vundle for more details or wiki for FAQ
     " Put your non-Plugin stuff after this line
-"===================================================================================
+"===========================================================================
 
 "=================================== Common Config ==============================
     set cscopetag
