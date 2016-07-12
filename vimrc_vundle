@@ -32,19 +32,18 @@
 "================================================================================
 "
 "=============================== my auto header =================================
-let my_auto_header_tmplate = "/home/jee/my_vim_cfg/my_template.txt"
+let my_auto_header_tmplate = "~/work/my_vim_cfg/my_template.txt"
 
 augroup myAutoGroup
     autocmd!
     autocmd bufnewfile *.c exe "so ".my_auto_header_tmplate
-    autocmd bufnewfile *.c exe "1," . 10 . "g/File Name :.*/s//File Name : " .expand("%")
-    autocmd bufnewfile *.c exe "1," . 10 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d-%m-%Y %H:%M:%S")
+    autocmd bufnewfile *.c exe "1," . 10 . "g/File Name :.*/s//File Name : ".expand("%")
+    autocmd bufnewfile *.c exe "1," . 10 . "g/Creation Date :.*/s//Creation Date : ".strftime("%d-%m-%Y %H:%M:%S")
     autocmd Bufwritepre,filewritepre *.c execute "normal ma"
-    autocmd Bufwritepre,filewritepre *.c exe "1," . 10 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
+    autocmd Bufwritepre,filewritepre *.c exe "1," . 10 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : ".strftime("%d-%m-%Y %H:%M:%S")
     autocmd bufwritepost,filewritepost *.c execute "normal `a"
 augroup END
 "================================================================================
-"
 
 "====================================== NERD_Tree config ===============================
     nnoremap <silent> <F6> : NERDTree<CR>

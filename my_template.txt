@@ -1,13 +1,18 @@
 :insert
-/* ===================================================== 
-* File Name :
+/* 
+ * =================================================================== 
+ *          File Name :
+ *
+ *         Description:
+ *
+ *      Creation Date :
+ *
+ *      Last Modified :
+ *
+ *             Author : houjian, houjmail@gmail.com 
+ *
+ *            Company : Tencent
+ * ==================================================================
+ */
 
-* Purpose :
-
-* Creation Date :
-
-* Last Modified :
-
-* Created By : jianhou houjmail@gmail.com 
-========================================================*/
 .
