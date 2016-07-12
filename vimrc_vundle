@@ -1,5 +1,5 @@
 "=============================== my auto header =================================
-    let my_auto_header_tmplate = "~/work/my_vim_cfg/my_template.txt"
+    let my_auto_header_tmplate = "~/.vim/my_template.txt"
     let my_auto_white_list = ["cpp", "c", "h", "go"]
     let my_auto_ext = expand('%:e')
     augroup myAutoGroup
