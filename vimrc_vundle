@@ -4,12 +4,12 @@
     let my_auto_ext = expand('%:e')
     augroup myAutoGroup
         au!
-        au bufnewfile * if index(my_auto_white_list, my_auto_ext) >= 0 | exe "so ".my_auto_header_tmplate
-        au bufnewfile * if index(my_auto_white_list, my_auto_ext) >= 0 | exe "1," . 10 . "g/File Name :.*/s//File Name : ".expand("%")
-        au bufnewfile * if index(my_auto_white_list, my_auto_ext) >= 0 | exe "1," . 10 . "g/Creation Date :.*/s//Creation Date : ".strftime("%d-%m-%Y %H:%M:%S")
+        au bufnewfile * if index(my_auto_white_list, expand('%:e')) >= 0 | exe "so ".my_auto_header_tmplate
+        au bufnewfile * if index(my_auto_white_list, expand('%:e')) >= 0 | exe "1," . 10 . "g/File Name :.*/s//File Name : ".expand("%")
+        au bufnewfile * if index(my_auto_white_list, expand('%:e')) >= 0 | exe "1," . 10 . "g/Creation Date :.*/s//Creation Date : ".strftime("%d-%m-%Y %H:%M:%S")
         try
-            au Bufwritepre,filewritepre * if index(my_auto_white_list, my_auto_ext) >= 0 | exe "normal ma"
-            au Bufwritepre,filewritepre * if index(my_auto_white_list, my_auto_ext) >= 0 | exe "1,".10."g/Last Modified :.*/s/Last Modified :.*/Last Modified : ".strftime("%d-%m-%Y %H:%M:%S")
+            au Bufwritepre,filewritepre * if index(my_auto_white_list, expand('%:e')) >= 0 | exe "normal ma"
+            au Bufwritepre,filewritepre * if index(my_auto_white_list, expand('%:e')) >= 0 | exe "1,".10."g/Last Modified :.*/s/Last Modified :.*/Last Modified : ".strftime("%d-%m-%Y %H:%M:%S")
             "au bufwritepost,filewritepost * if index(my_auto_white_list, my_auto_ext) >= 0 | exe "normal `a"
         catch  
             echom expand("%")."may not has a auto header"
