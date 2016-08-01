@@ -6,7 +6,7 @@ First view first:
 Install:
 =======
 In a simple way,please remove YCM,it's very very heavy.  
-If you want to install YCM support,it's very very cool. Please refer to [here](https://git.  . i   hub.com/Valloric/YouCompleteMe)
+If you want to install YCM support,it's very very cool. Please refer to [here](https://github.com/Valloric/YouCompleteMe)
   
  * make a soft link of my_template.txt to your ~/.vim 
  * make a soft link of bundle/vim-colorschemes/colors to your ~/.vim
