@@ -2,6 +2,7 @@
 First view first:
 ================
 ![image](https://raw.githubusercontent.com/jeehou/my_vim_cfg/master/screenshot/vim.jpg)
+[image](https://raw.githubusercontent.com/jeehou/my_vim_cfg/master/screenshot/ycm.jpg)
 
 Install:
 =======
