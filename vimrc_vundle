@@ -1,6 +1,6 @@
 "=============================== my auto header =================================
     let my_auto_header_tmplate = "~/.vim/my_template.txt"
-    let my_auto_white_list = ["cpp", "c", "h", "go"]
+    let my_auto_white_list = ["cpp", "c", "h", "go", "py"]
     let my_auto_ext = expand('%:e')
     augroup myAutoGroup
         au!
@@ -17,9 +17,30 @@
     augroup END
 "================================================================================
 
+"============================== syntastic ======================================
+    set statusline+=%#warningmsg#
+    set statusline+=%{SyntasticStatuslineFlag()}
+    set statusline+=%*
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_auto_loc_list = 1
+    let g:syntastic_check_on_open = 1
+    let g:syntastic_check_on_wq = 0
+    let g:syntastic_python_checkers = ["pyflakes"] "['pylint']
+
+    function! ToggleErrors()
+        let old_last_winnr = winnr('$')
+        lclose
+        if old_last_winnr == winnr('$')
+            " Nothing was closed, open syntastic error location panel
+            Errors
+        endif
+    endfunction
+    nnoremap <Leader>e :call ToggleErrors()<cr>
+"================================================================================
+
 "============================== NERD_Tree config ===============================
     nnoremap <silent> <F6> : NERDTree<CR>
-    let NERDTreeIgnore = ['\.o$']
+    let NERDTreeIgnore = ['\.o$', '\.pyc$']
     let NERDTreeShowBookmarks=1
     let NRRDTreeChristmasTree=1
     "auto NERDTree when start vim
@@ -46,23 +67,24 @@
     let g:startify_change_to_dir = 0 "open file from startify do not change dir
 "=====================================================================================
 
-"======================================= vim-javascript ==============================
+"==================================== vim-javascript ==============================
     let g:javascript_plugin_jsdoc = 1
     let g:javascript_plugin_ngdoc = 1
-"=====================================================================================
+"==================================================================================
 
-"====================================== YCM config ===================================
+"=================================== YCM config ===================================
     let g:ycm_confirm_extra_conf = 0 "open file with confim .ycm_extra_conf.py
     let g:ycm_goto_buffer_command = 'horizontal-split'
     let g:ycm_open_loclist_on_ycm_diags = 1 
     let g:ycm_global_ycm_extra_conf='~/.vim/ycm_extra_conf.py' 
     let g:ycm_echo_current_diagnostic = 1
+    let g:ycm_python_binary_path = '/usr/local/bin/python'
     nnoremap <leader>g :YcmCompleter GoTo<CR>
     nnoremap <leader>f :YcmForceCompileAndDiagnostics<CR>
     "nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
     "nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
     "nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
-"====================================================================================
+"==================================================================================
 "
 "====================================== ctrlp =======================================
     let g:ctrlp_working_path_mode = 0
@@ -99,14 +121,14 @@
     "let g:indentLine_faster = 1
 "==============================================================================
 
-"====================================== ack.vim =====================================
+"================================= ack.vim =====================================
     if executable('ag')
         let g:ackprg = 'ag --vimgrep --path-to-agignore ~/.agignore'
     endif
     noremap <Leader>s :Ack <cword><cr>
 "===================================================================================
 
-"===================================== vim-go"=====================================
+"================================= vim-go"=====================================
     let g:go_template_autocreate = 0 
     let g:go_highlight_functions = 1
     let g:go_highlight_methods = 1
@@ -116,11 +138,11 @@
     let g:go_highlight_build_constraints = 1
 "==================================================================================
 
-"===================================== vim-polyglot =============================
+"================================= vim-polyglot =============================
 let g:polyglot_disabled = ['markdown'] 
 "================================================================================
 
-"===================================== vim-airline ================================
+"================================== vim-airline ================================
     let g:airline_theme='cool'
 "==================================================================================
 
@@ -158,6 +180,7 @@ let g:polyglot_disabled = ['markdown']
     Plugin 'sheerun/vim-polyglot'
     Plugin 'mhinz/vim-signify'      "show svn(or else) diff in vim
     Plugin 'airblade/vim-gitgutter' "show git diff/undo in vim as a gutter
+    Plugin 'scrooloose/syntastic'
 
     " All of your Plugins must be added before the following line
     call vundle#end()            " required
