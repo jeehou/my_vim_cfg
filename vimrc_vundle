@@ -230,6 +230,7 @@ let g:polyglot_disabled = ['markdown']
     set background=dark
 
     nnoremap <leader><Space> :tabnext<CR>
+
 "================================================================================
 
 
