@@ -5,8 +5,8 @@
     augroup myAutoGroup
         au!
         au bufnewfile * if index(my_auto_white_list, expand('%:e')) >= 0 | exe "so ".my_auto_header_tmplate
-        au bufnewfile * if index(my_auto_white_list, expand('%:e')) >= 0 | exe "1," . 10 . "g/File Name :.*/s//File Name : ".expand("%")
         au bufnewfile * if index(my_auto_white_list, expand('%:e')) >= 0 | exe "1," . 10 . "g/Creation Date :.*/s//Creation Date : ".strftime("%d-%m-%Y %H:%M:%S")
+        au bufnewfile * if index(my_auto_white_list, expand('%:e')) >= 0 | exe "1," . 10 . "g/File Name :.*/s//File Name : ".expand("%:t")
         try
             au Bufwritepre,filewritepre * if index(my_auto_white_list, expand('%:e')) >= 0 | exe "normal ma"
             au Bufwritepre,filewritepre * if index(my_auto_white_list, expand('%:e')) >= 0 | exe "1,".10."g/Last Modified :.*/s/Last Modified :.*/Last Modified : ".strftime("%d-%m-%Y %H:%M:%S")
@@ -78,7 +78,13 @@
     let g:ycm_open_loclist_on_ycm_diags = 1 
     let g:ycm_global_ycm_extra_conf='~/.vim/ycm_extra_conf.py' 
     let g:ycm_echo_current_diagnostic = 1
+    "let g:ycm_seed_identifiers_with_syntax = 1
+    "let g:ycm_always_populate_location_list = 1
+    let g:ycm_complete_in_comments = 1
+    let g:ycm_complete_in_string = 1
+    let g:ycm_autoclose_preview_window_after_completion=1
     let g:ycm_python_binary_path = '/usr/local/bin/python'
+    "let g:ycm_cache_omnifunc=0
     nnoremap <leader>g :YcmCompleter GoTo<CR>
     nnoremap <leader>f :YcmForceCompileAndDiagnostics<CR>
     "nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
@@ -143,7 +149,7 @@ let g:polyglot_disabled = ['markdown']
 "================================================================================
 
 "================================== vim-airline ================================
-    let g:airline_theme='cool'
+    "let g:airline_theme='cool'
 "==================================================================================
 
 "============================== Vundle Config =============================
@@ -181,6 +187,8 @@ let g:polyglot_disabled = ['markdown']
     Plugin 'mhinz/vim-signify'      "show svn(or else) diff in vim
     Plugin 'airblade/vim-gitgutter' "show git diff/undo in vim as a gutter
     Plugin 'scrooloose/syntastic'
+    Plugin 'jacoborus/tender'
+    Plugin 'morhetz/gruvbox'
 
     " All of your Plugins must be added before the following line
     call vundle#end()            " required
@@ -214,19 +222,31 @@ let g:polyglot_disabled = ['markdown']
     set wildignore=*.bak,*.o,*.e,*~   " wildmenu:ignore these extensions
     set fdm=indent                    " use space to indent 
     set nowrap                        " not auto wrap
+    set breakindent
+    set ruler
 
     set encoding=utf-8
     set fileencodings=utf-bom,utf-8,cp936,gb18030,latin1
     language message zh_CN.utf-8
     set guifont=Consolas:h12:cANSI
 
+    let g:gruvbox_italic=1
+    let g:molokai_original=1
+
     filetype plugin indent on
     syntax on 
     set t_Co=256
+    "set tgc
     "colorscheme molokai 
     "colorscheme zenburn 
+    "colorscheme gruvbox
+    "colorscheme solarized 
     colorscheme lucius 
-    let g:molokai_original=1
+    "colorscheme tender 
+    "colorscheme jellybeans
+    let g:airline_theme = 'tender'
+    "let g:lightline = { 'colorscheme': 'tender' }
+
     set background=dark
 
     nnoremap <leader><Space> :tabnext<CR>
