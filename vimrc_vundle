@@ -1,16 +1,19 @@
 "=============================== my auto header =================================
     let my_auto_header_tmplate = "~/.vim/my_template.txt"
     let my_auto_white_list = ["cpp", "c", "h", "go", "py"]
+    let my_python_list = ["py"]
     let my_auto_ext = expand('%:e')
     augroup myAutoGroup
         au!
+        au bufnewfile * if index(my_python_list, expand('%:e')) >= 0 | let my_auto_header_tmplate ="~/.vim/my_template.txt.py"
         au bufnewfile * if index(my_auto_white_list, expand('%:e')) >= 0 | exe "so ".my_auto_header_tmplate
         au bufnewfile * if index(my_auto_white_list, expand('%:e')) >= 0 | exe "1," . 10 . "g/Creation Date :.*/s//Creation Date : ".strftime("%d-%m-%Y %H:%M:%S")
         au bufnewfile * if index(my_auto_white_list, expand('%:e')) >= 0 | exe "1," . 10 . "g/File Name :.*/s//File Name : ".expand("%:t")
         try
             au Bufwritepre,filewritepre * if index(my_auto_white_list, expand('%:e')) >= 0 | exe "normal ma"
             au Bufwritepre,filewritepre * if index(my_auto_white_list, expand('%:e')) >= 0 | exe "1,".10."g/Last Modified :.*/s/Last Modified :.*/Last Modified : ".strftime("%d-%m-%Y %H:%M:%S")
-            "au bufwritepost,filewritepost * if index(my_auto_white_list, my_auto_ext) >= 0 | exe "normal `a"
+            au bufwritepost,filewritepost * if index(my_auto_white_list, expand('%:e')) > 0 | exe "normal `a"
+            au bufwritepost,filewritepost * if index(my_auto_white_list, expand('%:e')) >= 0 | exe "normal <c-o>"
         catch  
             echom expand("%")."may not has a auto header"
         endtry
@@ -224,7 +227,6 @@ let g:polyglot_disabled = ['markdown']
     set fdm=indent                    " use space to indent 
     set nowrap                        " not auto wrap
     set breakindent
-    set ruler
 
     set encoding=utf-8
     set fileencodings=utf-bom,utf-8,cp936,gb18030,latin1
