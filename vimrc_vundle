@@ -189,6 +189,7 @@ let g:polyglot_disabled = ['markdown']
     Plugin 'scrooloose/syntastic'
     Plugin 'jacoborus/tender'
     Plugin 'morhetz/gruvbox'
+    Plugin 'jiangmiao/auto-pairs'
 
     " All of your Plugins must be added before the following line
     call vundle#end()            " required
