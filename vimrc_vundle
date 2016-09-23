@@ -5,16 +5,17 @@
     let my_auto_ext = expand('%:e')
     augroup myAutoGroup
         au!
-        au bufnewfile * if index(my_python_list, expand('%:e')) >= 0 | let my_auto_header_tmplate ="~/.vim/my_template.txt.py"
+        "au bufnewfile * if index(my_python_list, expand('%:e')) >= 0 | let my_auto_header_tmplate ="~/.vim/my_template.txt.py"
         au bufnewfile * if index(my_auto_white_list, expand('%:e')) >= 0 | exe "so ".my_auto_header_tmplate
         au bufnewfile * if index(my_auto_white_list, expand('%:e')) >= 0 | exe "1," . 10 . "g/Creation Date :.*/s//Creation Date : ".strftime("%d-%m-%Y %H:%M:%S")
         au bufnewfile * if index(my_auto_white_list, expand('%:e')) >= 0 | exe "1," . 10 . "g/File Name :.*/s//File Name : ".expand("%:t")
+        au Bufwritepre * StripWhitespace
         try
             au Bufwritepre,filewritepre * if index(my_auto_white_list, expand('%:e')) >= 0 | exe "normal ma"
-            au Bufwritepre,filewritepre * if index(my_auto_white_list, expand('%:e')) >= 0 | exe "1,".10."g/Last Modified :.*/s/Last Modified :.*/Last Modified : ".strftime("%d-%m-%Y %H:%M:%S")
+            au Bufwritepre,filewritepre * if index(my_auto_white_list, expand('%:e')) >= 0 | silent! exe "1,".10."g/Last Modified :.*/s/Last Modified :.*/Last Modified : ".strftime("%d-%m-%Y %H:%M:%S")
             au bufwritepost,filewritepost * if index(my_auto_white_list, expand('%:e')) > 0 | exe "normal `a"
             au bufwritepost,filewritepost * if index(my_auto_white_list, expand('%:e')) >= 0 | exe "normal <c-o>"
-        catch  
+        catch
             echom expand("%")."may not has a auto header"
         endtry
     augroup END
@@ -78,8 +79,8 @@
 "=================================== YCM config ===================================
     let g:ycm_confirm_extra_conf = 0 "open file with confim .ycm_extra_conf.py
     let g:ycm_goto_buffer_command = 'horizontal-split'
-    let g:ycm_open_loclist_on_ycm_diags = 1 
-    let g:ycm_global_ycm_extra_conf='~/.vim/ycm_extra_conf.py' 
+    let g:ycm_open_loclist_on_ycm_diags = 1
+    let g:ycm_global_ycm_extra_conf='~/.vim/ycm_extra_conf.py'
     let g:ycm_echo_current_diagnostic = 1
     "let g:ycm_seed_identifiers_with_syntax = 1
     "let g:ycm_always_populate_location_list = 1
@@ -97,7 +98,7 @@
 "
 "====================================== ctrlp =======================================
     let g:ctrlp_working_path_mode = 0
-    let g:ctrlp_clear_cache_on_exit = 0 
+    let g:ctrlp_clear_cache_on_exit = 0
     if executable("ag")
         set grepprg=ag\ --nogroup\ --nocolor "also make vim faster!
         let g:ctrlp_user_command='ag %s -l -g "" --nocolor --path-to-agignore ~/.agignore'
@@ -114,14 +115,14 @@
     "hi IndentGuidesOdd  ctermbg=darkgrey
     "hi IndentGuidesEven ctermbg=102
     "autocmd VimEnter,Colorscheme * :IndentGuidesToggle
-    "autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd   ctermbg=darkgrey 
+    "autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd   ctermbg=darkgrey
     "autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=102
     "let g:indent_guides_exclude_filetypes = ['help', 'nerdtree']
 "====================================================================================
 
 "================================= indentline =================================
     let g:indentLine_enabled = 1
-    let g:indentLine_char = '¦' 
+    let g:indentLine_char = '¦'
     "let g:indentLine_first_char = ' '
     let g:indentLine_color_term = 109
     "let g:indentLine_showFirstIndentLevel = 1
@@ -138,7 +139,7 @@
 "===================================================================================
 
 "================================= vim-go"=====================================
-    let g:go_template_autocreate = 0 
+    let g:go_template_autocreate = 0
     let g:go_highlight_functions = 1
     let g:go_highlight_methods = 1
     let g:go_highlight_fields = 1
@@ -148,7 +149,7 @@
 "==================================================================================
 
 "================================= vim-polyglot =============================
-let g:polyglot_disabled = ['markdown'] 
+let g:polyglot_disabled = ['markdown']
 "================================================================================
 
 "================================== vim-airline ================================
@@ -193,6 +194,7 @@ let g:polyglot_disabled = ['markdown']
     Plugin 'jacoborus/tender'
     Plugin 'morhetz/gruvbox'
     Plugin 'jiangmiao/auto-pairs'
+    Plugin 'ntpeters/vim-better-whitespace'
 
     " All of your Plugins must be added before the following line
     call vundle#end()            " required
@@ -224,7 +226,7 @@ let g:polyglot_disabled = ['markdown']
     set ruler                         " show the cursor position all the time
     set smartindent                   " smart autoindentnig when starting a new line
     set wildignore=*.bak,*.o,*.e,*~   " wildmenu:ignore these extensions
-    set fdm=indent                    " use space to indent 
+    set fdm=indent                    " use space to indent
     set nowrap                        " not auto wrap
     set breakindent
 
@@ -237,15 +239,15 @@ let g:polyglot_disabled = ['markdown']
     let g:molokai_original=1
 
     filetype plugin indent on
-    syntax on 
+    syntax on
     set t_Co=256
     "set tgc
-    "colorscheme molokai 
-    "colorscheme zenburn 
+    "colorscheme molokai
+    "colorscheme zenburn
     "colorscheme gruvbox
-    "colorscheme solarized 
-    colorscheme lucius 
-    "colorscheme tender 
+    "colorscheme solarized
+    colorscheme lucius
+    "colorscheme tender
     "colorscheme jellybeans
     let g:airline_theme = 'tender'
     "let g:lightline = { 'colorscheme': 'tender' }
