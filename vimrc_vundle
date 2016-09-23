@@ -29,7 +29,7 @@
     let g:syntastic_auto_loc_list = 1
     let g:syntastic_check_on_open = 1
     let g:syntastic_check_on_wq = 0
-    let g:syntastic_python_checkers = ["pyflakes"] "['pylint']
+    let g:syntastic_python_checkers = ["flake8"] "['pylint']
 
     function! ToggleErrors()
         let old_last_winnr = winnr('$')
@@ -127,7 +127,7 @@
     let g:indentLine_color_term = 109
     "let g:indentLine_showFirstIndentLevel = 1
     let g:indentLine_fileTypeExclude = ['text', 'help']
-    set list lcs=tab:\¦\ 
+    set list lcs=tab:\¦\
     "let g:indentLine_faster = 1
 "==============================================================================
 
