@@ -5,14 +5,14 @@
     let my_auto_ext = expand('%:e')
     augroup myAutoGroup
         au!
-        "au bufnewfile * if index(my_python_list, expand('%:e')) >= 0 | let my_auto_header_tmplate ="~/.vim/my_template.txt.py"
+        au bufnewfile * if index(my_python_list, expand('%:e')) >= 0 | let my_auto_header_tmplate ="~/.vim/my_template_py.txt"
         au bufnewfile * if index(my_auto_white_list, expand('%:e')) >= 0 | exe "so ".my_auto_header_tmplate
         au bufnewfile * if index(my_auto_white_list, expand('%:e')) >= 0 | exe "1," . 10 . "g/Creation Date :.*/s//Creation Date : ".strftime("%d-%m-%Y %H:%M:%S")
         au bufnewfile * if index(my_auto_white_list, expand('%:e')) >= 0 | exe "1," . 10 . "g/File Name :.*/s//File Name : ".expand("%:t")
         au Bufwritepre * StripWhitespace
         try
             au Bufwritepre,filewritepre * if index(my_auto_white_list, expand('%:e')) >= 0 | exe "normal ma"
-            au Bufwritepre,filewritepre * if index(my_auto_white_list, expand('%:e')) >= 0 | silent! exe "1,".10."g/Last Modified :.*/s/Last Modified :.*/Last Modified : ".strftime("%d-%m-%Y %H:%M:%S")
+            au Bufwritepre,filewritepre * if index(my_auto_white_list, expand('%:e')) >= 0 | silent! exe "1,".15."g/Last Modified :.*/s/Last Modified :.*/Last Modified : ".strftime("%d-%m-%Y %H:%M:%S")
             au bufwritepost,filewritepost * if index(my_auto_white_list, expand('%:e')) > 0 | exe "normal `a"
             au bufwritepost,filewritepost * if index(my_auto_white_list, expand('%:e')) >= 0 | exe "normal <c-o>"
         catch
@@ -183,8 +183,8 @@ let g:polyglot_disabled = ['markdown']
     Plugin 'rdnetto/YCM-Generator'
     Plugin 'Valloric/YouCompleteMe'
     Plugin 'octol/vim-cpp-enhanced-highlight'
-    Plugin 'Shougo/vimproc.vim'
-    Plugin 'Shougo/vimshell.vim'
+    "Plugin 'Shougo/vimproc.vim'
+    "Plugin 'Shougo/vimshell.vim'
     Plugin 'pangloss/vim-javascript'
     Plugin 'jistr/vim-nerdtree-tabs'
     Plugin 'sheerun/vim-polyglot'
@@ -195,6 +195,7 @@ let g:polyglot_disabled = ['markdown']
     Plugin 'morhetz/gruvbox'
     Plugin 'jiangmiao/auto-pairs'
     Plugin 'ntpeters/vim-better-whitespace'
+    Plugin 'elzr/vim-json'
 
     " All of your Plugins must be added before the following line
     call vundle#end()            " required
@@ -225,7 +226,7 @@ let g:polyglot_disabled = ['markdown']
     set foldenable
     set ruler                         " show the cursor position all the time
     set smartindent                   " smart autoindentnig when starting a new line
-    set wildignore=*.bak,*.o,*.e,*~   " wildmenu:ignore these extensions
+    set wildignore=*.pyc,*.bak,*.o,*.e,*~   " wildmenu:ignore these extensions
     set fdm=indent                    " use space to indent
     set nowrap                        " not auto wrap
     set breakindent
