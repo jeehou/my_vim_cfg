@@ -21,6 +21,12 @@
     augroup END
 "================================================================================
 
+"============================== python ========================================
+augroup filetypedetect
+  au! BufRead,BufNewFile *.sage,*.spyx,*.pyx setfiletype python
+augroup END
+"================================================================================
+
 "============================== syntastic ======================================
     set statusline+=%#warningmsg#
     set statusline+=%{SyntasticStatuslineFlag()}
@@ -28,7 +34,7 @@
     let g:syntastic_always_populate_loc_list = 1
     let g:syntastic_auto_loc_list = 1
     let g:syntastic_check_on_open = 1
-    let g:syntastic_check_on_wq = 0
+    let g:syntastic_check_on_wq = 1
     let g:syntastic_python_checkers = ["flake8"] "['pylint']
 
     function! ToggleErrors()
@@ -103,8 +109,12 @@
         set grepprg=ag\ --nogroup\ --nocolor "also make vim faster!
         let g:ctrlp_user_command='ag %s -l -g "" --nocolor --path-to-agignore ~/.agignore'
     endif
+    let g:ctrlp_custom_ignore = {
+      \  'dir':  '\.git$\|\.yardoc\|public$|log\|tmp$',
+      \  'file': '\.so$\|\.pyc$|\.dat$|\.DS_Store$'
+      \}
     nnoremap <C-p>m :CtrlPMRU<CR> "most recenty files use CtrlPMRU
-    let g:ctrlp_cache_dir = '.ctrlp_cache'
+    let g:ctrlp_cache_dir = '~/.ctrlp_cache'
 "====================================================================================
 
 "================================= indent-guid ======================================
@@ -153,7 +163,7 @@ let g:polyglot_disabled = ['markdown']
 "================================================================================
 
 "================================== vim-airline ================================
-    "let g:airline_theme='cool'
+    let g:airline_theme='cool'
 "==================================================================================
 
 "============================== Vundle Config =============================
@@ -191,11 +201,11 @@ let g:polyglot_disabled = ['markdown']
     Plugin 'mhinz/vim-signify'      "show svn(or else) diff in vim
     Plugin 'airblade/vim-gitgutter' "show git diff/undo in vim as a gutter
     Plugin 'scrooloose/syntastic'
-    Plugin 'jacoborus/tender'
     Plugin 'morhetz/gruvbox'
     Plugin 'jiangmiao/auto-pairs'
     Plugin 'ntpeters/vim-better-whitespace'
     Plugin 'elzr/vim-json'
+    "Plugin 'tshirtman/vim-cython'
 
     " All of your Plugins must be added before the following line
     call vundle#end()            " required
@@ -231,6 +241,8 @@ let g:polyglot_disabled = ['markdown']
     set nowrap                        " not auto wrap
     set breakindent
 
+    hi pythonInclude guifg=gray guibg=red ctermfg=gray ctermbg=red
+
     set encoding=utf-8
     set fileencodings=utf-bom,utf-8,cp936,gb18030,latin1
     language message zh_CN.utf-8
@@ -250,7 +262,7 @@ let g:polyglot_disabled = ['markdown']
     colorscheme lucius
     "colorscheme tender
     "colorscheme jellybeans
-    let g:airline_theme = 'tender'
+    "let g:airline_theme = 'tender'
     "let g:lightline = { 'colorscheme': 'tender' }
 
     set background=dark
@@ -258,5 +270,3 @@ let g:polyglot_disabled = ['markdown']
     nnoremap <leader><Space> :tabnext<CR>
 
 "================================================================================
-
-
