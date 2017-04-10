@@ -1,0 +1,15 @@
+ServerAliveInterval 60
+
+Host *
+    ControlMaster auto
+    ControlPath /tmp/ssh_connection_%h_%p_%r.sock
+    ControlPersist 72h
+    ForwardAgent yes
+
+Host gitlab.alipay-inc.com
+    RSAAuthentication yes
+    IdentityFile ~/.ssh/id_rsa
+    User xingwei.hj
+
+Host github.com
+    IdentityFile ~/.ssh/id_rsa
