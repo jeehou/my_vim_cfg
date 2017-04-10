@@ -1,0 +1,7 @@
+ssh -o ServerAliveInterval=15 -p 22 root@jp.jee.party
+ssh -o ServerAliveInterval=15 -p 36022 jee@10.0.0.1
+ssh -o ServerAliveInterval=15 -p 36001 root@10.0.0.2
+ssh -o ServerAliveInterval=15 -p 36002 admin@10.0.0.5
+ssh -o ServerAliveInterval=15 -p 22 xingwei.hj@login1.zue.alibaba.org
+ssh -o ServerAliveInterval=15 -p 22 admin@vein2.inc.alipay.net
+ssh -o ServerAliveInterval=15 -p 22 xingwei.hj@vein2.inc.alipay.net
