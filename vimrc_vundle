@@ -22,9 +22,23 @@
 "================================================================================
 
 "============================== python ========================================
-augroup filetypedetect
-  au! BufRead,BufNewFile *.sage,*.spyx,*.pyx setfiletype python
-augroup END
+    let python_highlight_string_formatting = 1
+    let python_highlight_indent_errors = 1
+    let python_highlight_space_errors = 1
+    let python_highlight_doctests = 1
+    let python_print_as_function = 1
+    let python_highlight_exceptions = 1
+    let python_highlight_file_headers_as_comments = 1
+    let python_highlight_builtins = 1
+    let python_highlight_string_format = 1
+    let python_highlight_all = 1
+
+    let g:SimpylFold_docstring_preview = 1
+    let g:SimpylFold_fold_import = 0
+
+    augroup filetypedetect
+        au! BufRead,BufNewFile *.sage,*.spyx,*.pyx setfiletype python
+    augroup END
 "================================================================================
 
 "============================== syntastic ======================================
@@ -33,7 +47,7 @@ augroup END
     set statusline+=%*
     let g:syntastic_always_populate_loc_list = 1
     let g:syntastic_auto_loc_list = 1
-    let g:syntastic_check_on_open = 1
+    "let g:syntastic_check_on_open = 1
     let g:syntastic_check_on_wq = 1
     let g:syntastic_python_checkers = ["flake8"] "['pylint']
 
@@ -50,7 +64,7 @@ augroup END
 
 "============================== NERD_Tree config ===============================
     nnoremap <silent> <F6> : NERDTree<CR>
-    let NERDTreeIgnore = ['\.o$', '\.pyc$']
+    let NERDTreeIgnore = ['\.o$', '\.pyc$', '\.so$']
     let NERDTreeShowBookmarks=1
     let NRRDTreeChristmasTree=1
     "auto NERDTree when start vim
@@ -93,7 +107,7 @@ augroup END
     let g:ycm_complete_in_comments = 1
     let g:ycm_complete_in_string = 1
     let g:ycm_autoclose_preview_window_after_completion=1
-    let g:ycm_python_binary_path = '/usr/local/bin/python'
+    "let g:ycm_python_binary_path = '/usr/local/bin/python'
     "let g:ycm_cache_omnifunc=0
     nnoremap <leader>g :YcmCompleter GoTo<CR>
     nnoremap <leader>f :YcmForceCompileAndDiagnostics<CR>
@@ -206,18 +220,15 @@ let g:polyglot_disabled = ['markdown']
     Plugin 'ntpeters/vim-better-whitespace'
     Plugin 'elzr/vim-json'
     "Plugin 'tshirtman/vim-cython'
+    Plugin 'hdima/python-syntax'
+    Plugin 'tmhedberg/SimpylFold'
+    Plugin 'vim-scripts/indentpython.vim'
 
     " All of your Plugins must be added before the following line
     call vundle#end()            " required
     filetype plugin indent on    " required
     " To ignore plugin indent changes, instead use:
     "filetype plugin on
-    "
-    " Brief help
-    " :PluginList       - lists configured plugins
-    " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-    " :PluginSearch foo - searches for foo; append `!` to refresh local cache
-    " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
     "
     " see :h vundle for more details or wiki for FAQ
     " Put your non-Plugin stuff after this line
@@ -240,6 +251,8 @@ let g:polyglot_disabled = ['markdown']
     set fdm=indent                    " use space to indent
     set nowrap                        " not auto wrap
     set breakindent
+    set scrolloff=5
+    set ignorecase
 
     hi pythonInclude guifg=gray guibg=red ctermfg=gray ctermbg=red
 
