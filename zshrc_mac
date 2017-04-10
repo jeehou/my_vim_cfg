@@ -13,7 +13,7 @@ ZSH_THEME="mytheme"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(thefuck zsh-syntax-highlighting cp colorize gitfast brew d z osx battery)
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:$HOME/work/local/bin"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:$HOME/work/my_vim_cfg/shell_tools"
 export GOPATH="$HOME/Documents/work_code/go"
 export GOBIN="/usr/local/go/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
