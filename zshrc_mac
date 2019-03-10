@@ -5,40 +5,12 @@
 
 export ZSH="/Users/jee/.oh-my-zsh"
 
-zsh_wifi_signal(){
-    local output=$(/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport -I)
-    local airport=$(echo $output | grep 'AirPort' | awk -F': ' '{print $2}')
-    if [ "$airport" = "Off" ]; then
-        local color='%F{yellow}'
-        echo -n "%{$color%}Wifi Off"
-    else
-        local ssid=$(echo $output | grep ' SSID' | awk -F': ' '{print $2}')
-        local speed=$(echo $output | grep 'lastTxRate' | awk -F': ' '{print $2}')
-        local color='%F{yellow}'
-
-        [[ $speed -gt 100 ]] && color='%F{green}'
-        [[ $speed -lt 50 ]] && color='%F{red}'
-
-        echo -n "%{$color%}$ssid $speed Mb/s%{%f%}" # removed char not in my PowerLine font
-    fi
-}
-
-POWERLEVEL9K_CUSTOM_WIFI_SIGNAL="zsh_wifi_signal"
-POWERLEVEL9K_MODE='nerdfont-complete'
-POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
-POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
-POWERLEVEL9K_TIME_FORMAT="%D{%Y.%m.%d %H:%M:%S}"
-POWERLEVEL9K_BATTERY_LEVEL_BACKGROUND=(red1 orangered1 darkorange orange1 gold1 yellow1 yellow2 greenyellow chartreuse1 chartreuse2 green1)
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context battery custom_wifi_signal vpn_ip dir vcs )
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(command_execution_time status root_indicator background_jobs history time)
-
 ZSH_THEME="powerlevel9k/powerlevel9k"
 
 
 export UPDATE_ZSH_DAYS=60
 
-plugins=(git mvn)
+plugins=(git mvn zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -62,3 +34,4 @@ export LANG=zh_CN.UTF-8
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export PATH="/usr/local/opt/ncurses/bin:$PATH"
