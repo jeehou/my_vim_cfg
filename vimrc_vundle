@@ -117,47 +117,26 @@
 "==================================================================================
 "
 "====================================== ctrlp =======================================
-    let g:ctrlp_working_path_mode = 0
-    let g:ctrlp_clear_cache_on_exit = 0
-    if executable("ag")
-        set grepprg=ag\ --nogroup\ --nocolor "also make vim faster!
-        let g:ctrlp_user_command='ag %s -l -g "" --nocolor --path-to-agignore ~/.agignore'
-    endif
-    let g:ctrlp_custom_ignore = {
-      \  'dir':  '\.git$\|\.yardoc\|public$|log\|tmp$',
-      \  'file': '\.so$\|\.pyc$|\.dat$|\.DS_Store$'
-      \}
-    nnoremap <C-p>m :CtrlPMRU<CR> "most recenty files use CtrlPMRU
-    let g:ctrlp_cache_dir = '~/.ctrlp_cache'
-"====================================================================================
+"    let g:ctrlp_working_path_mode = 0
+"    let g:ctrlp_clear_cache_on_exit = 0
+"    if executable("ag")
+"        set grepprg=ag\ --nogroup\ --nocolor "also make vim faster!
+"        let g:ctrlp_user_command='ag %s -l -g "" --nocolor --path-to-agignore ~/.agignore'
+"    endif
+"    set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+"    set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 
-"================================= indent-guid ======================================
-    "let g:indent_guides_guide_size=1
-    "let g:indent_guides_auto_colors = 0
-    "let g:indent_guides_enable_on_vim_startup=0
-    "let g:indent_guides_start_level=2
-    "hi IndentGuidesOdd  ctermbg=darkgrey
-    "hi IndentGuidesEven ctermbg=102
-    "autocmd VimEnter,Colorscheme * :IndentGuidesToggle
-    "autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd   ctermbg=darkgrey
-    "autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=102
-    "let g:indent_guides_exclude_filetypes = ['help', 'nerdtree']
+"    let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+"    let g:ctrlp_custom_ignore = {
+"            \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+"                \ 'file': '\v\.(exe|so|dll)$',
+"                \ 'link': 'some_bad_symbolic_links',
+"                \ }
 "====================================================================================
-
-"================================= indentline =================================
-    let g:indentLine_enabled = 1
-    let g:indentLine_char = '¦'
-    "let g:indentLine_first_char = ' '
-    let g:indentLine_color_term = 109
-    "let g:indentLine_showFirstIndentLevel = 1
-    let g:indentLine_fileTypeExclude = ['text', 'help']
-    set list lcs=tab:\¦\
-    "let g:indentLine_faster = 1
-"==============================================================================
 
 "================================= ack.vim =====================================
     if executable('ag')
-        let g:ackprg = 'ag --vimgrep --path-to-agignore ~/.agignore'
+        let g:ackprg = 'ag'
     endif
     noremap <Leader>s :Ack <cword><cr>
 "===================================================================================
@@ -196,29 +175,28 @@ let g:polyglot_disabled = ['markdown']
     Plugin 'vim-airline/vim-airline-themes'
     Plugin 'kien/ctrlp.vim'
     Plugin 'scrooloose/nerdtree'
-    Plugin 'fatih/vim-go'
+    "Plugin 'fatih/vim-go'
     Plugin 'mileszs/ack.vim'
     Plugin 'vim-scripts/a.vim'
     Plugin 'flazz/vim-colorschemes'
     Plugin 'asins/vimcdoc'
     "Plugin 'nathanaelkane/vim-indent-guides'
-    Plugin 'yggdroot/indentline'
     Plugin 'mhinz/vim-startify'
-    Plugin 'rdnetto/YCM-Generator'
-    Plugin 'Valloric/YouCompleteMe'
+    "Plugin 'rdnetto/YCM-Generator'
+    "Plugin 'Valloric/YouCompleteMe'
     Plugin 'octol/vim-cpp-enhanced-highlight'
     "Plugin 'Shougo/vimproc.vim'
     "Plugin 'Shougo/vimshell.vim'
-    Plugin 'pangloss/vim-javascript'
+    "Plugin 'pangloss/vim-javascript'
     Plugin 'jistr/vim-nerdtree-tabs'
-    Plugin 'sheerun/vim-polyglot'
+    "Plugin 'sheerun/vim-polyglot'
     Plugin 'mhinz/vim-signify'      "show svn(or else) diff in vim
-    Plugin 'airblade/vim-gitgutter' "show git diff/undo in vim as a gutter
+    "Plugin 'airblade/vim-gitgutter' "show git diff/undo in vim as a gutter
     Plugin 'scrooloose/syntastic'
     Plugin 'morhetz/gruvbox'
     Plugin 'jiangmiao/auto-pairs'
     Plugin 'ntpeters/vim-better-whitespace'
-    Plugin 'elzr/vim-json'
+    "Plugin 'elzr/vim-json'
     "Plugin 'tshirtman/vim-cython'
     Plugin 'hdima/python-syntax'
     Plugin 'tmhedberg/SimpylFold'
